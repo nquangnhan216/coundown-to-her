@@ -3,60 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Countdown to You 💖</title>
+  <title>Countdown to Her 💫</title>
   <style>
     body {
-      font-family: "Poppins", sans-serif;
+      background: #0f0f0f;
+      color: #fff;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #f8cdda, #1d2b64);
-      color: #fff;
+      font-family: "Poppins", sans-serif;
       text-align: center;
     }
     h1 {
       font-size: 2rem;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
     #countdown {
-      font-size: 3rem;
+      font-size: 2rem;
       letter-spacing: 2px;
-      margin-top: 10px;
-    }
-    footer {
-      position: absolute;
-      bottom: 15px;
-      font-size: 0.9rem;
-      opacity: 0.8;
     }
   </style>
 </head>
 <body>
-  <h1>Counting the days until I see you again 💕</h1>
+  <h1>Countdown to Her 🌙</h1>
   <div id="countdown">Loading...</div>
-  <footer>— Made with ❤️ by Partner</footer>
 
   <script>
-    // 🎯 Target date — months are 0-indexed, so 8 = September
-    const targetDate = new Date(2026, 8, 1, 0, 0, 0);
-    const countdownEl = document.getElementById("countdown");
+    // Set the date you meet: September 1, 2026
+    const targetDate = new Date("September 1, 2026 00:00:00").getTime();
 
     function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
+      const now = new Date().getTime();
+      const distance = targetDate - now;
 
-      if (diff <= 0) {
-        countdownEl.textContent = "She's here 💖";
-        clearInterval(interval);
-        return;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "It's time! 💖";
       }
+    }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      countdownEl.textContent = `${days}d ${
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
